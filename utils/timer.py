@@ -34,7 +34,7 @@ class Timer:
 
         elapsed_time = time.perf_counter() - self._start_time
         self._start_time = None
-        print(self.text.format(elapsed_time))
+        # print(self.text.format(elapsed_time))
 
         if self.logger:
             self.logger(self.text.format(elapsed_time))
