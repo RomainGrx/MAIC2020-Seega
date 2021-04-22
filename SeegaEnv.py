@@ -3,7 +3,7 @@
 """
 @author : Romain Graux
 @date : 2021 Apr 12, 13:48:50
-@last modified : 2021 Apr 13, 17:45:01
+@last modified : 2021 Apr 19, 14:44:13
 """
 
 from seega import SeegaState
@@ -184,7 +184,11 @@ class SeegaEnv(Env):
         if not SeegaRules.is_player_stuck(self.state, self.oponent_color):
             oponent_remaining_time = self.oponent_timer.remain_time()
             self.oponent_timer.start()
-            oponent_action = self.oponent.play(self.state, oponent_remaining_time)
+            try:
+                oponent_action = self.oponent.play(self.state, oponent_remaining_time)
+            except Exception as e:
+                print(e)
+                oponent_action = None
             self.oponent_timer.stop()
             if isinstance(oponent_action, SeegaAction):
                 oponent_result = SeegaRules.act(
